@@ -1,18 +1,28 @@
 import { Router } from "express";
 
-const router = Router()
+import {
+  renderTasks,
+  createTask,
+  renderTaskEdit,
+  editTask,
+  deleteTask,
+  taskToggleDone,
+} from "../controllers/tasks.controller";
 
-router.get("/", (req, res) => {
-  res.render('index')
-});
+const router = Router();
 
-router.get("/about", (req, res) => {
-  res.render('about')
-});
+router.get("/", renderTasks);
 
-router.get("/edit", (req, res) => {
-  res.render('edit')
-});
+router.post("/tasks/add", createTask);
+
+router.get("/tasks/:id/toggleDone", taskToggleDone);
+
+router.get("/tasks/:id/edit", renderTaskEdit);
+
+router.post("/tasks/:id/edit", editTask);
+
+router.get("/tasks/:id/delete", deleteTask);
+
 
 
 export default router;
